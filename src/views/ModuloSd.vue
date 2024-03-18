@@ -50,7 +50,7 @@ export default {
       .then(data =>{
          console.log(data);
          this.mostrarAlerta = true;
-         alert('Mensaje')
+         alert('Otro mensaje')
 
          this.$router.push("ModuloEt");
       })
