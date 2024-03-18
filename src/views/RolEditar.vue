@@ -36,6 +36,7 @@ export default {
             idRol: null,
             currentRol: null,
             form: {
+                idRol: this.$route.params.idRol,
                 "nombre": "",
             }
         }
@@ -51,8 +52,11 @@ export default {
     }, 
     methods:{
         editar(){
-            axios.put('http://localhost:5069/api/Roles/Editar')
-        }
+            axios.put('http://localhost:5069/api/Roles/Editar', this.form)
+            
+            this.$router.push("RolesTs");
+
+        },
     }
     
 
@@ -85,6 +89,7 @@ export default {
 .controls {
   width: 100%;
   background: #24303c;
+  color: aliceblue;
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 16px;

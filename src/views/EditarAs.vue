@@ -43,13 +43,13 @@ export default {
         idUsuario: null,
         currentUser: null,
         form: {
-          "nombre": "",
-          "apellido": "",
-          "correo" : "",
-          "contrasena": "",
-          "cargo": "",
-          "telefono": "",
-          "idRol": "",
+          nombre: null,
+          apellido: null,
+          correo: null,
+          contrasena: null,
+          cargo: null,
+          telefono: null,
+          idRol: null,
         }
       }
     },
@@ -84,12 +84,13 @@ export default {
         //   this.$router.push("users")
         // })
 
-        axios.put(`http://localhost:5069/api/Usuarios/EditarUsuario?IdUsuario=8&nombre=jefferson&apellido=Castillo&correo=dios2345%40gmail.com&contrasena=edsfef&cargo=ergegrrdsf&telefono=e345325dfd&idRol=4`)
+        axios.put(`http://localhost:5069/api/Usuarios/EditarUsuario?IdUsuario=${this.$route.params.idUsuario}&nombre=${this.form.nombre}&apellido=${this.form.apellido}&correo=${this.form.correo}&contrasena=${this.form.contrasena}&cargo=${this.form.cargo}&telefono=${this.form.telefono}&idRol=${this.form.idRol}`)
         .then(data =>{
           console.log(data);
-          this.$router.push("users")
-        })
+          this.$router.push("TablaWe")
+        });
       }
+      
     }
 }
 </script>

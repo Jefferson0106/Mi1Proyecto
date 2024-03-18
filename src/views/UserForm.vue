@@ -18,7 +18,7 @@
           <input type="password" name="Contraseña" id="Contraseña" placeholder="Ingrese su Contraseña" v-model="form.contrasena">
           <input type="text" name="Cargos" id="Cargos" placeholder="Ingrese su Cargos" v-model="form.cargo">
           <input type="text" name="Telefono" id="Telefono" placeholder="Ingrese su Telefono" v-model="form.telefono">
-          <input type="text" name="Rol" id="Rol" placeholder="Ingrese su Rol" v-model="form.idrol">
+          <input type="text" name="Rol" id="Rol" placeholder="Ingrese su Rol" v-model="form.idRol">
           <input class="botons" type="submit" value="Reguistrar" v-on:click="guardar()">
         </section>
     </body>
@@ -36,14 +36,15 @@ export default{
   name: "UserForm",
   data:function(){
     return {
+      idUsuario: null,
       form:{
-        nombre: null ,
-         apellido: null,
-      corre:  null,
-      contrasena: null,
-         cargo: null,
+        nombre: null,
+        apellido: null,
+        correo: null,
+        contrasena: null,
+        cargo: null,
         telefono: null,
-         idrol:  null,
+        idRol: null
       }
     }
   },
@@ -53,10 +54,10 @@ export default{
   },
   methods:{
     guardar(){
-      axios.post("http://localhost:5069/api/Usuarios/GuardarUsuario", this.form)
+      axios.post(`http://localhost:5069/api/Usuarios/GuardarUsuario?nombre=${this.form.nombre}%20&apellido=${this.apellido}&correo=${this.form.correo}&contrasena=${this.form.contrasena}&cargo=${this.cargo}&telefono=${this.form.telefono}&idRol=${this.form.idRol}`)
       .then(data =>{
         console.log(data);
-      this.$router.push("users")
+      this.$router.push("TablaWe")
       });
     }
   }

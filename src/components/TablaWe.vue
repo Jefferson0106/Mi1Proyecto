@@ -1,5 +1,6 @@
 <template>
     <div>
+        <HeaderQa/>
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -25,17 +26,20 @@
                             <img src="../assets/gr.png"  style="width: 80%">
                         </button>
 
-                        <button ctype="button" class="btn btn-dark margen ">
+                        <button ctype="button" class="btn btn-dark margen " @click="eliminar(Usuario.idUsuario)">
                             <img src="@/assets/bas.png"  style="width: 80%">
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <FooterDe/>
     </div>
 </template>
 
 <script>
+import HeaderQa from './HeaderQa.vue';
+import FooterDe from './FooterDe.vue';
 import axios from 'axios';
 export default {
     name: "TablaWe",
@@ -46,6 +50,8 @@ export default {
     },
 
     components: {
+        HeaderQa,
+        FooterDe
 
     },
 
@@ -65,6 +71,12 @@ export default {
     editar(idUsuario) {
       this.$router.push('EditarAs/' + idUsuario);
     },
+    eliminar(idUsuario){
+        axios.delete('http://localhost:5069/api/Usuarios/Eliminar/' + idUsuario)
+        .then(data => {
+          console.log(data);
+    });
+}
     }
 
 

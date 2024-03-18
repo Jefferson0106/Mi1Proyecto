@@ -101,46 +101,44 @@ export default {
   components: {
 
   },
-  data: function () {
+  data() {
     return {
-      Usuario: "",
-      contrasena: "",
-      correo: null,
+      correo: '',
+      contrasena: '',
       error: false,
-      error_msg: "",
-    }
+      error_msg: '¡Error! Verifica tus credenciales.',
+    };
   },
   methods: {
     login() {
       let json = {
         "Usuario": this.Usuario,
         "Correo": this.correo,
-        "Contrasena": this.Contrasena
+        "Contrasena": this.contrasena
       };
+
       axios.get('http://localhost:5069/api/Usuarios/ListaUsuario', json)
         .then(data => {
-          console.log(data)
-
-          if (data.statusText == "OK") {
+          if (data.statusText === "OK") {
             let results = data.data.response;
+            let userToLoad = results.find(element => element.correo === this.correo);
 
-            let userToLoad = results.find(element => element.correo == this.correo)
-            
-            if(userToLoad && userToLoad.contrasena==this.contrasena){
-              this.$router.push('Base')
+            if (userToLoad && userToLoad.contrasena === this.contrasena) {
+              this.$router.push('Base');
+            } else {
+              this.error = true;
             }
-
-            else{
-              console.log('Contrasena incorrecta')
-            }
-
           } else {
             this.error = true;
           }
         })
+        .catch(error => {
+          console.error('Error al realizar la solicitud:', error);
+          this.error = true;
+        });
     }
   }
-}
+};
 </script>
 
 
@@ -391,5 +389,14 @@ h2 {
 
 .signup-link a:hover {
   text-decoration: underline;
+}
+
+.alert {
+  background-color: black;
+  color: red;
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
 }
 </style>

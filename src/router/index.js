@@ -5,6 +5,7 @@ import BaseComp from '../views/BaseComp.vue'
 import DashboardComp from '../views/DashboardComp.vue'
 import UsersComp from '../views/UsersComp.vue'
 import UserForm from '../views/UserForm.vue'
+import TablaWe from '@/components/TablaWe.vue'
 import EditarAs from '../views/EditarAs.vue'
 import RolesTs from '../views/RolesTs.vue'
 import RolNuevo from '../views/RolNuevo.vue'
@@ -29,6 +30,7 @@ const routes = [
       { name: 'dashboard', path: 'dashboard', component: DashboardComp },
       { name: 'usuarios', path: 'users', component: UsersComp},
       { name: 'usuariosForm', path: 'userForm', component: UserForm},
+      { name: 'TablaWe', path: 'TablaWe', component: TablaWe},
       { name: 'EditarAs,', path: 'EditarAs/:idUsuario', component: EditarAs},
       { name:  'RolesTs', path: 'RolesTs', component:RolesTs},
       {name: 'RolNuevo', path: 'RolNuevo', component:RolNuevo},

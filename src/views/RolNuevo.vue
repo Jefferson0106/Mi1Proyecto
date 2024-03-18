@@ -81,6 +81,7 @@ export default {
   width: 100%;
   background: #24303c;
   padding: 10px;
+  color: aliceblue;
   border-radius: 4px;
   margin-bottom: 16px;
   border: 1px solid #1f53c5;
