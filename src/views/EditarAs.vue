@@ -18,8 +18,13 @@
           <input type="password" name="Contraseña" id="Contraseña" placeholder="Ingrese su Contraseña"  v-model="form.contrasena">
           <input type="text" name="Cargos" id="Cargos" placeholder="Ingrese su Cargos"  v-model="form.cargo">
           <input type="text" name="Telefono" id="Telefono" placeholder="Ingrese su Telefono"  v-model="form.telefono">
-          <input type="text" name="Rol" id="Rol" placeholder="Ingrese su Rol"  v-model="form.idRol">
-          <input class="botons" type="submit" value="Reguistrar" v-on:click="editar()" >
+          <select class="select" v-model="form.idRol" name="transport" id="transport">
+
+<option v-for="(option, index) in options" :key="index" :value="option.idRol">{{ option.nombre }}</option>
+
+</select>
+
+          <input class="botons" type="submit" value="Editar" v-on:click="editar()" >
         </section>
     </body>
   </html>
@@ -50,7 +55,8 @@ export default {
           cargo: null,
           telefono: null,
           idRol: null,
-        }
+        },
+        options: null,
       }
     },
     mounted: function () {
@@ -67,9 +73,15 @@ export default {
           this.form.cargo = this.currentUser.cargo;
           this.form.telefono = this.currentUser.telefono;
           this.form.idRol = this.currentUser.idRol;
-
+            
+          
 
         });
+        let direccion = "http://localhost:5069/api/Roles/Lista";
+    axios.get(direccion).then(data => {
+      this.options = data.data.response;
+      console.log(data)
+    });
 
 
     },
@@ -87,7 +99,7 @@ export default {
         axios.put(`http://localhost:5069/api/Usuarios/EditarUsuario?IdUsuario=${this.$route.params.idUsuario}&nombre=${this.form.nombre}&apellido=${this.form.apellido}&correo=${this.form.correo}&contrasena=${this.form.contrasena}&cargo=${this.form.cargo}&telefono=${this.form.telefono}&idRol=${this.form.idRol}`)
         .then(data =>{
           console.log(data);
-          this.$router.push("TablaWe")
+          this.$router.push("usersComp")
         });
       }
       
@@ -116,6 +128,7 @@ export default {
 .form-register input {
   width: 100%;
   background: #24303c;
+  color: aliceblue;
   padding: 10px;
   border-radius: 4px;
   margin-bottom: 16px;
@@ -132,6 +145,13 @@ export default {
 }
 .body{
   background: #24303c;
+}
+
+.select {
+  width: 15%;
+  background: #24303c;
+  color: aliceblue;
+  padding: 1px;
 }
 
 </style>

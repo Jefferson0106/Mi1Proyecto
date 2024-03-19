@@ -13,6 +13,7 @@ import RolEditar from '../views/RolEditar.vue'
 import ModuloSd from '../views/ModuloSd.vue'
 import ModuloEt from '../views/ModuloEt.vue'
 import ModuloEditar from  '../views/ModuloEditar.vue'
+import RegistroPortada from '../views/RegistroPortada.vue'
 
 Vue.use(VueRouter)
 
@@ -28,8 +29,8 @@ const routes = [
     component: BaseComp,
     children: [
       { name: 'dashboard', path: 'dashboard', component: DashboardComp },
-      { name: 'usuarios', path: 'users', component: UsersComp},
-      { name: 'usuariosForm', path: 'userForm', component: UserForm},
+      { name: 'usuarios', path: 'usersComp', component: UsersComp},
+      { name: 'userForm', path: 'userForm', component: UserForm},
       { name: 'TablaWe', path: 'TablaWe', component: TablaWe},
       { name: 'EditarAs,', path: 'EditarAs/:idUsuario', component: EditarAs},
       { name:  'RolesTs', path: 'RolesTs', component:RolesTs},
@@ -40,6 +41,11 @@ const routes = [
       {name: 'ModuloEditar', path: 'ModuloEditar/:idModulo', component: ModuloEditar}
 
     ]
+  },
+  {
+    path: '/RegistroPortada',
+    name: 'RegistroPortada',
+    component: RegistroPortada
   },
  
 ]

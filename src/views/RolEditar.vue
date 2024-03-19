@@ -12,6 +12,14 @@
             <section class="form-register">
                 <h4>Formulario De Editar</h4>
             <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese Su Nombre Del Rol" v-model="form.nombre">
+
+            <h4>Eliga su Modulo</h4>
+
+<select class="select" v-model="form.idModulo" name="transport" id="transport">
+
+<option v-for="(option, index) in options" :key="index" :value="option.idModulo">{{ option.nombre }}</option>
+
+</select>
             <input class="boton" type="submit" value="Editar" v-on:click="editar()">
             </section>
         </body>
@@ -38,7 +46,8 @@ export default {
             form: {
                 idRol: this.$route.params.idRol,
                 "nombre": "",
-            }
+            },
+            options: null,
         }
     },
     mounted: function(){
@@ -49,6 +58,12 @@ export default {
             this.currentRol = data.data.response;
             this.form.nombre = this.currentRol.nombre
         });
+        let direccion = "http://localhost:5069/api/Modulos/ListaModulo";
+    axios.get(direccion).then(data => {
+      this.options = data.data.response;
+      console.log(data)
+
+    });
     }, 
     methods:{
         editar(){
@@ -106,5 +121,12 @@ export default {
   color: white;
   margin: 16px 0;
   font-size: 16px;
+}
+
+.select {
+  width: 15%;
+  background: #24303c;
+  color: aliceblue;
+  padding: 1px;
 }
 </style>

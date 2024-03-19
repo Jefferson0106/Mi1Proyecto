@@ -25,10 +25,9 @@
           <label>Contraseña</label>
         </div>
         <div class="forget-pass">
-          <a href="#">Olvidaste tu contraseña</a>
         </div>
         <button type="submit" class="btn">Ingresar</button>
-        <div class="signup-link">
+        <div class="signup-link" @click="reguistro()">
           <a href="#">Registrarse</a>
         </div>
       </form>
@@ -136,6 +135,9 @@ export default {
           console.error('Error al realizar la solicitud:', error);
           this.error = true;
         });
+    },
+    reguistro(){
+      this.$router.push("RegistroPortada")
     }
   }
 };

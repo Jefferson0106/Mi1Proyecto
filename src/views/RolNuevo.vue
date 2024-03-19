@@ -12,6 +12,14 @@
             <section class="form-register">
               <h4>Formulario de Roles</h4>
               <input class="controls" type="text" name="nombres" id="nombre" placeholder="Ingrese Su Nombre Del Rol" v-model="form.nombre">
+
+              <h4>Eliga su Modulo</h4>
+
+              <select multiple class="select" v-model="form.idModulo"  name="transport" id="transport" >
+
+<option  v-for="(option, index) in options" :key="index" :value="option.idModulo">{{ option.nombre }}</option>
+
+</select>
               <input class="boton" type="submit" value="Aceptar" v-on:click="Guardar()">
             </section>
           </body>
@@ -33,7 +41,8 @@ export default {
         form: {
           idRol: this.idRol,
           nombre: this.nombre
-        }
+        },
+        options: null,
       }
     },
     components: {
@@ -42,6 +51,13 @@ export default {
 
 
     },
+    mounted: function (){
+    let direccion = "http://localhost:5069/api/Modulos/ListaModulo";
+    axios.get(direccion).then(data => {
+      this.options = data.data.response;
+      console.log(data)
+    })
+  },
     methods:{
       Guardar(){
       axios.post("http://localhost:5069/api/Roles/Guardar", this.form)
@@ -58,12 +74,14 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  color: aliceblue;
   box-sizing: border-box;
 }
 
 .form-register {
   width: 400px;
   background: #24303c;
+  color: aliceblue;
   padding: 30px;
   margin: auto;
   margin-top: 100px;
@@ -97,6 +115,13 @@ export default {
   color: white;
   margin: 16px 0;
   font-size: 16px;
+}
+
+.select {
+  width: 15%;
+  background: #24303c;
+  color: aliceblue;
+  padding: 1px;
 }
 
 </style>
