@@ -1,18 +1,17 @@
 <template>
     <div>
-        <HeaderQa/>
-        <FooterDe/>
+        <!--FooterDe/> !--->
 
     </div>
 </template>
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
-import FooterDe from '@/components/FooterDe.vue';
+//import HeaderQa from '@/components/HeaderQa.vue';
+///import FooterDe from '@/components/FooterDe.vue';
 export default {
     name:"DashboardComp",
     components: {
-      HeaderQa,
-      FooterDe
+    //  HeaderQa,
+     // FooterDe
     }
 }
 </script>

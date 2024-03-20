@@ -1,6 +1,6 @@
 <template>
     <div>
-    <HeaderQa/>
+    
     <div>
         <table class="table table-dark">
             <thead>
@@ -27,19 +27,19 @@
             </tbody>
         </table>
     </div>
-    <FooterDe/>
+        <!--FooterDe/> !--->
     </div>
 </template>
 
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
-import FooterDe from '@/components/FooterDe.vue';
+///import HeaderQa from '@/components/HeaderQa.vue';
+//import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
 export default {
     name: "RolesTs",
     components: {
-        HeaderQa,
-        FooterDe
+      ///  HeaderQa,
+       /// FooterDe
 
 },
 data() {

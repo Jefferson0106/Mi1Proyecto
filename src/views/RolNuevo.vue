@@ -1,70 +1,95 @@
 <template>
-    <div >
-        <HeaderQa/>
-      <div>
-        <html lang="en">
-          <heade>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-sca">
-            <title>Formulariio</title>
-          </heade>
-          <body>
-            <section class="form-register">
-              <h4>Formulario de Roles</h4>
-              <input class="controls" type="text" name="nombres" id="nombre" placeholder="Ingrese Su Nombre Del Rol" v-model="form.nombre">
+  <div>
+   
+    <div>
+      <html lang="en">
+      <heade>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-sca">
+        <title>Formulariio</title>
+      </heade>
 
-              <h4>Eliga su Modulo</h4>
+      <body>
+        <section class="form-register">
+          <h4>Formulario de Roles</h4>
+          <input class="controls" type="text" name="nombres" id="nombre" placeholder="Ingrese Su Nombre Del Rol"
+            v-model="form.nombre">
 
-              <select multiple class="select" v-model="form.idModulo"  name="transport" id="transport" >
+          <h4>Eliga su Modulo</h4>
+
+          <!-- <select multiple class="select" v-model="form.idModulo"  name="transport" id="transport" >
 
 <option  v-for="(option, index) in options" :key="index" :value="option.idModulo">{{ option.nombre }}</option>
 
-</select>
-              <input class="boton" type="submit" value="Aceptar" v-on:click="Guardar()">
-            </section>
-          </body>
-        </html>
+</select> -->
+
+          <vSelect class="select" v-if="rolOptions" multiple label="nombre" :options="rolOptions" v-model="Relacione"
+            style="color: blue;   font-size: 14px;"></vSelect>
+          <input class="boton" type="submit" value="Aceptar" v-on:click="Guardar()">
+        </section>
+      </body>
+
+      </html>
+    </div>
+        <!--FooterDe/> !--->
       </div>
-       <FooterDe/>
-  </div>
 </template>
 
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
-import FooterDe from '@/components/FooterDe.vue';
+///import HeaderQa from '@/components/HeaderQa.vue';
+///import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
+import vSelect from 'vue-select';
+
 export default {
-    name: "RolNuevo",
-    data: function(){
-      return {
-        idRol: null,
-        form: {
-          idRol: this.idRol,
-          nombre: this.nombre
-        },
-        options: null,
-      }
-    },
-    components: {
-        HeaderQa,
-        FooterDe
-
-
-    },
-    mounted: function (){
+  name: "RolNuevo",
+  data: function () {
+    return {
+      idRol: null,
+      form: {
+        idRol: this.idRol,
+        nombre: this.nombre,
+      },
+      rolOptions: null,
+      Relacione: null,
+    }
+  },
+  components: {
+   // HeaderQa,
+    //FooterDe,
+    vSelect
+  },
+  mounted: function () {
     let direccion = "http://localhost:5069/api/Modulos/ListaModulo";
     axios.get(direccion).then(data => {
-      this.options = data.data.response;
+      this.rolOptions = data.data.response;
       console.log(data)
     })
   },
-    methods:{
-      Guardar(){
+  methods: {
+   async Guardar() {
       axios.post("http://localhost:5069/api/Roles/Guardar", this.form)
-      .then(data =>{
-         console.log(data);
-         this.$router.push("RolesTs");
-      })
+        .then(async data => {
+          console.log(data);
+          console.log(this.Relacione);
+
+          for(let relation of this.Relacione){
+            let dirreccionrt = `http://localhost:5069/api/Relaciones/GuardarRelaciones?IdModolo=${relation.idModulo}&idRol=${data.data.savedRole.idRol}`
+            await axios.post(dirreccionrt).then(dataRol => {
+            console.log(dataRol);
+          })
+          }
+
+          this.$router.push('RolesTs');
+
+        })
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
+        ;
+
     }
   }
 }
@@ -118,10 +143,7 @@ export default {
 }
 
 .select {
-  width: 15%;
   background: #24303c;
   color: aliceblue;
-  padding: 1px;
 }
-
 </style>

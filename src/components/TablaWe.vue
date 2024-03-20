@@ -1,6 +1,5 @@
 <template>
     <div>
-        <HeaderQa/>
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-import HeaderQa from './HeaderQa.vue';
+//import HeaderQa from './HeaderQa.vue';
 import FooterDe from './FooterDe.vue';
 import axios from 'axios';
 export default {
@@ -50,7 +49,7 @@ export default {
     },
 
     components: {
-        HeaderQa,
+      ///  HeaderQa,
         FooterDe
 
     },

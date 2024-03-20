@@ -1,6 +1,5 @@
 <template>
     <div>
-  <HeaderQa/>
   <div>
     <html lang="en">
         <heade>
@@ -17,19 +16,17 @@
         </body>
     </html>
   </div>
-  <FooterDe/>
+        <!--FooterDe/> !--->
     </div>
 </template>
 
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
-import FooterDe from '@/components/FooterDe.vue';
+//import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
 export default {
     name: "ModuloEditar",
     components: {
-  HeaderQa,
- FooterDe
+ ///FooterDe
     },
     data: function (){
         return {

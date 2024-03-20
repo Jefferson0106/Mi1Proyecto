@@ -1,6 +1,5 @@
 <template>
   <div>
-    <HeaderQa/>
     <div class="form-register">
   <html lang="en">
     <head>
@@ -29,19 +28,19 @@
     </body>
   </html>
   </div>
-    <FooterDe/>
-  </div>
+        <!--FooterDe/> !--->
+      </div>
 </template>
 
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
-import FooterDe from '@/components/FooterDe.vue';
+///import HeaderQa from '@/components/HeaderQa.vue';
+///import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
 export default {
     name:"EditarAs",
     components: {
-      HeaderQa,
-      FooterDe
+     /// HeaderQa,
+     /// FooterDe
     },
     data: function (){
       return {
@@ -73,6 +72,7 @@ export default {
           this.form.cargo = this.currentUser.cargo;
           this.form.telefono = this.currentUser.telefono;
           this.form.idRol = this.currentUser.idRol;
+        
             
           
 
@@ -89,17 +89,10 @@ export default {
       editar(){
 
         console.log(this.form)
-
-        // axios.put(`http://localhost:5069/api/Usuarios/EditarUsuario?IdUsuario=${this.idUsuario}&nombre=${this.form.nombre}&apellido=${this.form.apellido}&correo=dios2345%40gmail.com&contrasena=dmwofrf&cargo=ergegrr&telefono=e345325&idRol=3`)
-        // .then(data =>{
-        //   console.log(data);
-        //   this.$router.push("users")
-        // })
-
         axios.put(`http://localhost:5069/api/Usuarios/EditarUsuario?IdUsuario=${this.$route.params.idUsuario}&nombre=${this.form.nombre}&apellido=${this.form.apellido}&correo=${this.form.correo}&contrasena=${this.form.contrasena}&cargo=${this.form.cargo}&telefono=${this.form.telefono}&idRol=${this.form.idRol}`)
         .then(data =>{
           console.log(data);
-          this.$router.push("usersComp")
+          this.$router.push({name: "usuarios"})
         });
       }
       

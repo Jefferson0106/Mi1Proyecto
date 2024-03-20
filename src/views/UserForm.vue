@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderQa />
+    <!--HeaderQa /> !-->
     <div class="form-register">
       <html lang="en">
 
@@ -35,13 +35,13 @@
 
       </html>
     </div>
-    <FooterDe />
-  </div>
+        <!--FooterDe/> !--->
+      </div>
 </template>
 
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
-import FooterDe from '@/components/FooterDe.vue';
+///import HeaderQa from '@/components/HeaderQa.vue';
+//import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios'
 export default {
   name: "UserForm",
@@ -62,8 +62,8 @@ export default {
   },
 
   components: {
-    HeaderQa,
-    FooterDe
+   // HeaderQa,
+   /// FooterDe
   },
 
   mounted: function (){

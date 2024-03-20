@@ -1,22 +1,19 @@
 <template>
     <div>
-        <HeaderQa/>
         <TablaWe/>
-        <FooterDe/>
+        <!--FooterDe/> !--->
        
 </div>
 </template>
 
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
 import TablaWe from '@/components/TablaWe.vue';
-import FooterDe from '@/components/FooterDe.vue';
+//import FooterDe from '@/components/FooterDe.vue';
 export default {
     name:"UsersComp",
     components: {
-        HeaderQa,
         TablaWe,
-        FooterDe
+       // FooterDe
     }
 }
 </script>

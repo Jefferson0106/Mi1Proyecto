@@ -1,6 +1,5 @@
 <template>
    <div >
-        <HeaderQa/>
       <div>
         <html lang="en">
           <heade>
@@ -20,13 +19,13 @@
           </body>
         </html>
       </div>
-       <FooterDe/>
-  </div>
+        <!--FooterDe/> !--->
+      </div>
 </template>
 
 <script>
-import HeaderQa from '@/components/HeaderQa.vue';
-import FooterDe from '@/components/FooterDe.vue';
+//import HeaderQa from '@/components/HeaderQa.vue';
+//import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
 export default {
     name: "ModuloSd",
@@ -41,8 +40,8 @@ export default {
       }
     },
     components: {
-        HeaderQa,
-        FooterDe
+       // HeaderQa,
+      //  FooterDe
     },
     methods:{
       Guardar(){
