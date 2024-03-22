@@ -22,8 +22,9 @@
 <option v-for="(option, index) in options" :key="index" :value="option.idRol">{{ option.nombre }}</option>
 
 </select>
+                <VueSimpleAlert/>
 
-          <input class="botons" type="submit" value="Editar" v-on:click="editar()" >
+          <input class="botons" type="submit" value="Editar" @click="editar()" >
         </section>
     </body>
   </html>
@@ -36,11 +37,13 @@
 ///import HeaderQa from '@/components/HeaderQa.vue';
 ///import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
+import VueSimpleAlert from 'vue-simple-alert';
 export default {
     name:"EditarAs",
     components: {
      /// HeaderQa,
-     /// FooterDe
+     /// FooterDe,
+     VueSimpleAlert
     },
     data: function (){
       return {
@@ -86,12 +89,16 @@ export default {
 
     },
     methods: {
+      mostrarAlerta() {
+      this.$alert('¡Su Usuario Actualizado!');
+      },
       editar(){
 
         console.log(this.form)
         axios.put(`http://localhost:5069/api/Usuarios/EditarUsuario?IdUsuario=${this.$route.params.idUsuario}&nombre=${this.form.nombre}&apellido=${this.form.apellido}&correo=${this.form.correo}&contrasena=${this.form.contrasena}&cargo=${this.form.cargo}&telefono=${this.form.telefono}&idRol=${this.form.idRol}`)
         .then(data =>{
           console.log(data);
+          this.mostrarAlerta(); 
           this.$router.push({name: "usuarios"})
         });
       }

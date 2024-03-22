@@ -62,7 +62,19 @@ export default {
         Editar(idModulo) {
             this.$router.push('ModuloEditar/' + idModulo)
         },
-        Eliminar(idModulo) {
+        async Eliminar(idModulo) {
+
+            let moduleRelations = await axios.get("http://localhost:5069/api/Relaciones/ListaRelacione")
+            moduleRelations = moduleRelations.data.response
+            console.log('total rel', moduleRelations)
+            let filteredRelations = moduleRelations.filter(element => element.idModulo == idModulo)
+            console.log('rels', filteredRelations)
+
+            for(let relation of filteredRelations){
+                let deleteResponse = await axios.delete("http://localhost:5069/api/Relaciones/Eliminar/"+relation.idRelaciones)
+                console.log(deleteResponse)
+            }
+
             axios.delete("http://localhost:5069/api/Modulos/Eliminar/" + idModulo)
                 .then(data => {
                     console.log(data);

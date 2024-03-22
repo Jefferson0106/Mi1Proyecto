@@ -28,8 +28,8 @@
             <option v-for="(option, index) in options" :key="index" :value="option.idRol">{{ option.nombre }}</option>
 
           </select>
-
-          <input class="botons" type="submit" value="Reguistrar" v-on:click="guardar()">
+          <VueSimpleAlert/>
+          <input class="botons" type="submit" value="Reguistrar" @click="guardar()" style="cursor: pointer;">
         </section>
       </body>
 
@@ -43,6 +43,7 @@
 ///import HeaderQa from '@/components/HeaderQa.vue';
 //import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios'
+import VueSimpleAlert from 'vue-simple-alert';
 export default {
   name: "UserForm",
   data: function () {
@@ -62,8 +63,7 @@ export default {
   },
 
   components: {
-   // HeaderQa,
-   /// FooterDe
+    VueSimpleAlert
   },
 
   mounted: function (){
@@ -75,12 +75,18 @@ export default {
   },
 
   methods: {
+    mostrarAlerta() {
+      this.$alert('¡Su Usuario a Sido creado!');
+    },
     guardar() {
       console.log(this.form)
       axios.post(`http://localhost:5069/api/Usuarios/GuardarUsuario?nombre=${this.form.nombre}&apellido=${this.form.apellido}&correo=${this.form.correo}&contrasena=${this.form.contrasena}&cargo=${this.form.cargo}&telefono=${this.form.telefono}&idRol=${this.form.idRol}`)
         .then(data => {
           console.log(data);
+          this.mostrarAlerta(); 
           this.$router.push("UsersComp")
+
+
         });
     }
   }
@@ -136,5 +142,17 @@ export default {
   background: #24303c;
   color: aliceblue;
   padding: 1px;
+}
+
+modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

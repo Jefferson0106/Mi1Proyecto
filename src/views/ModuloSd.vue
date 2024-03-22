@@ -11,10 +11,9 @@
             <section class="form-register">
               <h4>Formulario de Modulo</h4>
               <input class="controls" type="text" name="nombres" id="nombre" placeholder="Ingrese Su Nombre Del Modulo" v-model="form.nombre" >
+              <VueSimpleAlert/>
               <input class="boton" type="submit" value="Aceptar" @click="Guardar()">
-              <div class="alert alert-info" role="alert" v-if="mostrarAlerta">
-                   {{ mostrarAlerta }}
-          </div>
+            
             </section>
           </body>
         </html>
@@ -27,6 +26,7 @@
 //import HeaderQa from '@/components/HeaderQa.vue';
 //import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
+import VueSimpleAlert from 'vue-simple-alert';
 export default {
     name: "ModuloSd",
     data: function(){
@@ -36,21 +36,22 @@ export default {
           idModulo: this.idModulo,
           nombre: this.nombre
         },
-        mostrarAlerta: false, 
       }
     },
     components: {
        // HeaderQa,
-      //  FooterDe
+      //  FooterDe,
+      VueSimpleAlert
     },
     methods:{
+      mostrarAlerta() {
+      this.$alert('¡Su Modulo a Sido creado!');
+    },
       Guardar(){
       axios.post("http://localhost:5069/api/Modulos/Guardar", this.form)
       .then(data =>{
          console.log(data);
-         this.mostrarAlerta = true;
-         alert('Otro mensaje')
-
+         this.mostrarAlerta(); 
          this.$router.push("ModuloEt");
       })
     }

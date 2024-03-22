@@ -48,7 +48,22 @@ export default {
     },
     methods:{
         editar(){
-            axios.put('http://localhost:5069/api/Modulos/Editar')
+            let payload = {
+                idModulo: this.idModulo,
+                nombre: this.form.nombre
+            }
+
+            axios.put('http://localhost:5069/api/Modulos/Editar', payload).then(
+                response => {
+                    console.log(response)
+                    this.$router.go(-1)
+                }
+            )
+            .catch(
+                error => {
+                    console.log(error)
+                }
+            )
         }
     }
 }

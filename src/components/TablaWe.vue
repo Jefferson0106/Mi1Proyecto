@@ -24,7 +24,7 @@
                         <button type="button" class="btn btn-dark margen " @click="editar(Usuario.idUsuario)">
                             <img src="../assets/gr.png"  style="width: 80%">
                         </button>
-
+                          <VueSimpleAlert/>
                         <button ctype="button" class="btn btn-dark margen " @click="eliminar(Usuario.idUsuario)">
                             <img src="@/assets/bas.png"  style="width: 80%">
                         </button>
@@ -40,6 +40,7 @@
 //import HeaderQa from './HeaderQa.vue';
 import FooterDe from './FooterDe.vue';
 import axios from 'axios';
+import VueSimpleAlert from 'vue-simple-alert';
 export default {
     name: "TablaWe",
     data() {
@@ -50,7 +51,10 @@ export default {
 
     components: {
       ///  HeaderQa,
-        FooterDe
+        FooterDe,
+        VueSimpleAlert
+        
+        
 
     },
 
@@ -70,10 +74,22 @@ export default {
     editar(idUsuario) {
       this.$router.push('EditarAs/' + idUsuario);
     },
+    mostrarAlerta() {
+      this.$alert('¡Su Usuario a Sido creado!');
+    },
+    
     eliminar(idUsuario){
         axios.delete('http://localhost:5069/api/Usuarios/Eliminar/' + idUsuario)
         .then(data => {
           console.log(data);
+
+          let dirrecion = "http://localhost:5069/api/Usuarios/ListaUsuario";
+        axios.get(dirrecion).then(data => {
+            this.ListaUsuario = data.data.response;
+            console.log(this.ListaUsuario);
+        })
+
+          
     });
 }
     }

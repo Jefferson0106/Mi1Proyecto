@@ -1,6 +1,6 @@
 <template>
   <div>
-   
+
     <div>
       <html lang="en">
       <heade>
@@ -25,20 +25,22 @@
 
           <vSelect class="select" v-if="rolOptions" multiple label="nombre" :options="rolOptions" v-model="Relacione"
             style="color: blue;   font-size: 14px;"></vSelect>
+          <VueSimpleAlert />
           <input class="boton" type="submit" value="Aceptar" v-on:click="Guardar()">
         </section>
       </body>
 
       </html>
     </div>
-        <!--FooterDe/> !--->
-      </div>
+    <!--FooterDe/> !--->
+  </div>
 </template>
 
 <script>
 ///import HeaderQa from '@/components/HeaderQa.vue';
 ///import FooterDe from '@/components/FooterDe.vue';
 import axios from 'axios';
+import VueSimpleAlert from 'vue-simple-alert';
 import vSelect from 'vue-select';
 
 export default {
@@ -55,9 +57,10 @@ export default {
     }
   },
   components: {
-   // HeaderQa,
+    // HeaderQa,
     //FooterDe,
-    vSelect
+    vSelect,
+    VueSimpleAlert
   },
   mounted: function () {
     let direccion = "http://localhost:5069/api/Modulos/ListaModulo";
@@ -67,17 +70,23 @@ export default {
     })
   },
   methods: {
-   async Guardar() {
+    mostrarAlerta() {
+      this.$alert('¡Su Rol a Sido creado!');
+    },
+    async Guardar() {
       axios.post("http://localhost:5069/api/Roles/Guardar", this.form)
         .then(async data => {
           console.log(data);
           console.log(this.Relacione);
 
-          for(let relation of this.Relacione){
-            let dirreccionrt = `http://localhost:5069/api/Relaciones/GuardarRelaciones?IdModolo=${relation.idModulo}&idRol=${data.data.savedRole.idRol}`
-            await axios.post(dirreccionrt).then(dataRol => {
-            console.log(dataRol);
-          })
+          if (this.Relacione) {
+            for (let relation of this.Relacione) {
+              let dirreccionrt = `http://localhost:5069/api/Relaciones/GuardarRelaciones?IdModolo=${relation.idModulo}&idRol=${data.data.savedRole.idRol}`
+              await axios.post(dirreccionrt).then(dataRol => {
+                console.log(dataRol);
+                this.mostrarAlerta();
+              })
+            }
           }
 
           this.$router.push('RolesTs');

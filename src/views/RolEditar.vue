@@ -25,7 +25,7 @@
 
           <vSelect class="select" v-if="rolOptions" multiple label="nombre" :options="rolOptions" v-model="Relacione" :reduce="item => item.idModulo"
             style="color: blue;   font-size: 14px;"></vSelect>
-          <input class="boton" type="submit" value="Aceptar" v-on:click="Guardar()">
+          <input class="boton" type="submit" value="Aceptar" v-on:click="editar()">
         </section>
       </body>
 
@@ -84,10 +84,20 @@ export default {
     });
   },
   methods: {
-    editar() {
-      axios.put('http://localhost:5069/api/Roles/Editar', this.form)
+    async editar() {
+      await axios.put('http://localhost:5069/api/Roles/Editar', this.form)
 
-      this.$router.push("RolesTs");
+      for(let relation of this.rolRelations){
+        let deleteResponse = await axios.delete('http://localhost:5069/api/Relaciones/Eliminar/'+relation.idRelaciones)
+        console.log(deleteResponse)
+      }
+
+      for(let module of this.Relacione){
+        let createResponse = await axios.post(`http://localhost:5069/api/Relaciones/GuardarRelaciones?IdModolo=${module}&idRol=${this.idRol}`)
+        console.log(createResponse)
+      }
+
+      this.$router.go(-1)
 
     },
   }

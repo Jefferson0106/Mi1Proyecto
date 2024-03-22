@@ -122,7 +122,12 @@ export default {
             let results = data.data.response;
             let userToLoad = results.find(element => element.correo === this.correo);
 
+            console.log(userToLoad)
+
             if (userToLoad && userToLoad.contrasena === this.contrasena) {
+              // let modulo = JSON.stringify(results.idRol)
+
+              localStorage.setItem("Rol",`${userToLoad.idRol}`)
               this.$router.push('Base');
             } else {
               this.error = true;
