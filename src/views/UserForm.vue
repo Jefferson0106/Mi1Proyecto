@@ -12,6 +12,7 @@
       </head>
 
       <body class="body">
+        <img class="img" src="../assets/participacion.png" @click="salir()" width="50" style="float: right; cursor: pointer;"  >
         <section>
           <h4 class="form-register h4 ">Formulario Reguistro</h4>
           <input class="form-register input " type="text" name="Nombre" id="Nombre" placeholder="Ingrese su Nombre"
@@ -88,7 +89,10 @@ export default {
 
 
         });
-    }
+    },
+    salir() {
+	this.$router.push("UsersComp")
+}
   }
 
 }
@@ -138,7 +142,7 @@ export default {
 }
 
 .select {
-  width: 15%;
+  width: 90%;
   background: #24303c;
   color: aliceblue;
   padding: 1px;

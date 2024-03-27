@@ -18,8 +18,8 @@
 
         <div style="width: 100%;">
             <HeaderQa />
+            <router-view style="width: 100%; height: 80vh; overflow: scroll;"></router-view>
             <FooterDe />
-            <router-view style="width: 100%;"></router-view>
         </div>
 
     </div>

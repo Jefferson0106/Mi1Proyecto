@@ -1,12 +1,13 @@
 <template>
-  <div>
-
+  <div >
+    <!--<img class="img" src="../assets/participacion.png" @click="salir()" width="50" style="float: right; cursor: pointer;"  > --->
     <div>
       <html lang="en">
       <heade>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-sca">
         <title>Formulariio</title>
+
       </heade>
 
       <body>
@@ -99,7 +100,10 @@ export default {
         )
         ;
 
-    }
+    },
+    salir() {
+	this.$router.push({name: "usuarios"})
+}
   }
 }
 </script>

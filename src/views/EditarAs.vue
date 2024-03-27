@@ -9,6 +9,7 @@
       <title>Formulario de Registro</title>
     </head>
     <body class="body">
+      <img class="img" src="../assets/participacion.png" @click="salir()" width="50" style="float: right; cursor: pointer;"  >
         <section >
           <h4 class="form-register h4 ">Formulario de actualizar</h4>
           <input class="form-register input "  type="text" name="Nombre" id="Nombre" placeholder="Ingrese su Nombre" v-model="form.nombre">
@@ -101,7 +102,10 @@ export default {
           this.mostrarAlerta(); 
           this.$router.push({name: "usuarios"})
         });
-      }
+      },
+salir() {
+	this.$router.push({name: "usuarios"})
+}
       
     }
 }

@@ -1,40 +1,42 @@
 <template>
- <div>
-  <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#"></b-navbar-brand>
+  <div style="z-index: 1000000000000;">
+    <div toggleable="lg" type="dark" variant="info" style="height: 10vh; width: 100%; margin: 0;">
+      <b-row style="height: 10vh; margin: 0;">
+        <b-col style="background-color:dodgerblue; height: 100%;" sm="10"></b-col>
+        <b-col style="background-color:dodgerblue; height: 100%" sm="2">
+          <b-nav-item-dropdown>
+            <template #button-content>
+              <img src="../assets/usuario.svg" style="width: 30px" v-on:click="salir()">
+            </template>
+            <b-dropdown-item v-on:click="salir()">Salir </b-dropdown-item>
+          </b-nav-item-dropdown>
+        </b-col>
 
-    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-    <b-collapse id="nav-collapse" is-nav>
-    </b-collapse>
-    <b-nav-item-dropdown >
-          <template #button-content>
-            <img src="../assets/usuario.svg"  width="50" v-on:click="salir()">
-          </template>
-          <b-dropdown-item v-on:click="salir()">Salir </b-dropdown-item>
-        </b-nav-item-dropdown>
-  </b-navbar>
-</div>
+      </b-row>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
-  name:"HeaderQa",
-  components:{
+import { BRow, BCol } from 'bootstrap-vue';
 
+export default {
+  name: "HeaderQa",
+  components: {
+    BRow,
+    BCol
   },
   methods: {
-      salir(){
-        this.$router.push('/');
-      }
+    salir() {
+      this.$router.push('/');
+    }
   }
 }
 </script>
 
 
 <style scoped>
-.let{
+.let {
   cursor: pointer;
 }
-
 </style>

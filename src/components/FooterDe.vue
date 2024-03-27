@@ -26,12 +26,12 @@
     </template>
     <style scoped>
     footer {
-        position: fixed;
-        height: 70px;
+        height: 10vh;
         bottom: 0;
         width: 100%;
         background-color: black;
         color: blanchedalmond;
+        z-index: 1;
 }
 
 .iconos {
